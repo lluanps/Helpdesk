@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 import com.luan.helpdesk.domain.enums.Perfil;
 
-import lombok.NoArgsConstructor;
-
 public abstract class Pessoa {
 	
 	protected Integer id;
@@ -21,6 +19,7 @@ public abstract class Pessoa {
 	protected LocalDate dateCriacao = LocalDate.now();
 
 	public Pessoa() {
+		super();
 		addPerfil(Perfil.CLIENTE);
 	}
 	
