@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.luan.helpdesk.domain.enums.Perfil;
+
 @Entity
 public class Cliente extends Pessoa {
 	private static final long serialVersionUID = 1L;
@@ -16,6 +18,7 @@ public class Cliente extends Pessoa {
 
 	public Cliente() {
 		super();
+		addPerfil(Perfil.CLIENTE);//adiciona perfil ao cliente quando for criado
 	}
 
 	public Cliente(Integer id, String nome, String cpf, String email, String senha) {
