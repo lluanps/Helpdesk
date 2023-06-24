@@ -25,7 +25,7 @@ public class DBService {
 	private ClienteRepository clienteRepository;
 	
 	@Autowired
-	private ChamadoRepository chamadoRepository;	
+	private ChamadoRepository chamadoRepository;
 
 	public void instanciaDB() {
 		
