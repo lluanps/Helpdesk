@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.luan.helpdesk.domain.Instrutor;
+import com.luan.helpdesk.domain.dtos.InstrutorDTO;
 import com.luan.helpdesk.services.InstrutorService;
 
 @RestController
@@ -18,9 +19,9 @@ public class InstrutorController {
 	private InstrutorService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Instrutor> findById(@PathVariable Integer id) {
+	public ResponseEntity<InstrutorDTO> findById(@PathVariable Integer id) {
 		Instrutor obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+		return ResponseEntity.ok().body(new InstrutorDTO(obj));
 	}
 	
 }
