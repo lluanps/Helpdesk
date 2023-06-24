@@ -3,8 +3,15 @@ package com.luan.helpdesk.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente extends Pessoa {
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
+@Entity
+public class Cliente extends Pessoa {
+	private static final long serialVersionUID = 1L;
+	
+	//um cliente para varios chamados
+	@OneToMany(mappedBy = "cliente")
 	private List<Chamado> chamados = new ArrayList<>();
 
 	public Cliente() {
