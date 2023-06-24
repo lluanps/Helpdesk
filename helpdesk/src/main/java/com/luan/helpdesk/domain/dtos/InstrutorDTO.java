@@ -25,6 +25,7 @@ public class InstrutorDTO implements Serializable{
 
 	public InstrutorDTO() {
 		super();
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public InstrutorDTO(Instrutor obj) {
