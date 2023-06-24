@@ -6,12 +6,14 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luan.helpdesk.domain.enums.Perfil;
 
 @Entity
 public class Instrutor extends Pessoa {
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore//usado para evitar problema de serialização
 	//um tecnico para muitos chamados
 	@OneToMany(mappedBy = "instrutor")
 	private List<Chamado> chamados = new ArrayList<>();
