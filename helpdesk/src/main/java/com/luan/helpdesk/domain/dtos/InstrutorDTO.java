@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.luan.helpdesk.domain.Instrutor;
+import com.luan.helpdesk.domain.enums.Perfil;
 
 public class InstrutorDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -77,12 +78,12 @@ public class InstrutorDTO implements Serializable{
 		this.senha = senha;
 	}
 
-	public Set<Integer> getPerfis() {
-		return perfis;
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setPerfis(Set<Integer> perfis) {
-		this.perfis = perfis;
+	public void addPerfil(Perfil perfis) {
+		this.perfis.add(perfis.getCodigo());
 	}
 
 	public LocalDate getDateCriacao() {
