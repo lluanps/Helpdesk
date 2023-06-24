@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.luan.helpdesk.domain.Instrutor;
 import com.luan.helpdesk.repositories.InstrutorRepository;
+import com.luan.helpdesk.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class InstrutorService {
@@ -16,6 +17,6 @@ public class InstrutorService {
 	
 	public Instrutor findById(Integer id) {
 		Optional<Instrutor> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id));
 	}
 }
