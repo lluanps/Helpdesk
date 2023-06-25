@@ -3,6 +3,8 @@ package com.luan.helpdesk.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,14 @@ public class InstrutorService {
 		Instrutor save = new Instrutor(dto);
 		return repository.save(save);
 	}
+
+	public Instrutor update(Integer id, @Valid InstrutorDTO dto) {
+		dto.setId(id);
+		Instrutor oldObj = findById(id);
+		validaPorCpfEEmail(dto);
+		oldObj = new Instrutor(dto);
+		return repository.save(oldObj);
+	}
 	
 	private void validaPorCpfEEmail(InstrutorDTO dto) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(dto.getCpf());
@@ -51,5 +61,6 @@ public class InstrutorService {
 		}
 		
 	}
+
 
 }
