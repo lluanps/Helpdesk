@@ -38,6 +38,13 @@ public class ClienteService {
 		Cliente save = new Cliente(dto);
 		return repository.save(save);
 	}
+	
+	public Cliente update(ClienteDTO dto, Integer id) {
+		dto.setId(id);
+		Cliente oldObj = findById(id);
+		oldObj = new Cliente(dto);
+		return repository.save(oldObj);
+	}
 
 	private void validaPorCpfEEmail(ClienteDTO dto) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(dto.getCpf());
@@ -49,8 +56,9 @@ public class ClienteService {
 		if (obj.isPresent() && obj.get().getId() != dto.getId()) {
 			throw new DataIntegrityViolationException("Email ja cadastrado no sistema!");
 		}
-		
 	}
+
+
 
 	
 
