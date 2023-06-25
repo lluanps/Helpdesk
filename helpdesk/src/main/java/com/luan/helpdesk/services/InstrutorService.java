@@ -21,10 +21,10 @@ public class InstrutorService {
 
 	@Autowired
 	private InstrutorRepository repository;
-	
+
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	
+
 	public Instrutor findById(Integer id) {
 		Optional<Instrutor> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id));
@@ -48,7 +48,16 @@ public class InstrutorService {
 		oldObj = new Instrutor(dto);
 		return repository.save(oldObj);
 	}
-	
+
+	public void delete(Integer id) {
+		Instrutor obj = findById(id);
+		// Verifica se o instrutor tem uma ordem em seu nome ou não
+		if (obj.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException("Instrutor possui ordem de serviço e não pode ser deletado!");
+		}
+		repository.deleteById(id);
+	}
+
 	private void validaPorCpfEEmail(InstrutorDTO dto) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(dto.getCpf());
 		if (obj.isPresent() && obj.get().getId() != dto.getId()) {
@@ -59,8 +68,7 @@ public class InstrutorService {
 		if (obj.isPresent() && obj.get().getId() != dto.getId()) {
 			throw new DataIntegrityViolationException("Email já cadastrado no sistema");
 		}
-		
-	}
 
+	}
 
 }
