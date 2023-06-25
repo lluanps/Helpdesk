@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.luan.helpdesk.domain.Cliente;
+import com.luan.helpdesk.domain.dtos.ClienteDTO;
 import com.luan.helpdesk.repositories.ClienteRepository;
 import com.luan.helpdesk.services.exceptions.ObjectNotFoundException;
 
@@ -23,6 +24,11 @@ public class ClienteService {
 
 	public List<Cliente> findAll() {
 		return repository.findAll();
+	}
+
+	public Cliente create(ClienteDTO dto) {
+		Cliente save = new Cliente();
+		return repository.save(save);
 	}
 
 	
