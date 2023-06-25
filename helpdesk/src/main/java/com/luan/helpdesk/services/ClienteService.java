@@ -35,7 +35,7 @@ public class ClienteService {
 	public Cliente create(ClienteDTO dto) {
 		dto.setId(null);
 		validaPorCpfEEmail(dto);
-		Cliente save = new Cliente();
+		Cliente save = new Cliente(dto);
 		return repository.save(save);
 	}
 

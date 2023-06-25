@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +41,7 @@ public class ClienteController {
 	}
 	
 	@PostMapping(value = "/save")
-	public ResponseEntity<ClienteDTO> save(@RequestBody ClienteDTO dto) {
+	public ResponseEntity<ClienteDTO> save(@Valid @RequestBody ClienteDTO dto) {
 		Cliente entity = service.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getId()).toUri();
 		return ResponseEntity.created(uri).build();

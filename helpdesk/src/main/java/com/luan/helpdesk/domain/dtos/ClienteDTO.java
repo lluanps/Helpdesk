@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.luan.helpdesk.domain.Cliente;
 import com.luan.helpdesk.domain.enums.Perfil;
@@ -14,10 +16,19 @@ public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	protected Integer id;
+	
+	@NotNull(message = "Campo nome é obrigatório")
 	protected String nome;
+
+	@NotNull(message = "Campo cpf é obrigatório")
 	protected String cpf;
+	
+	@NotNull(message = "Campo email é obrigatório")
 	protected String email;
+	
+	@NotNull(message = "Campo senha é obrigatório")
 	protected String senha;
+	
 	protected Set<Integer> perfis = new HashSet<>();
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
