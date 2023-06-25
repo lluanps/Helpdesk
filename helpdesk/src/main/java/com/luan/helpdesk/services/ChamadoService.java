@@ -1,5 +1,6 @@
 package com.luan.helpdesk.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,14 +43,27 @@ public class ChamadoService {
 		return repository.save(newChamado(dto));
 	}
 
+	public Chamado update(Integer id, @Valid ChamadoDTO dto) {
+		dto.setId(id); // Assegura que obj vai ter um id
+		Chamado oldObj = findById(id); // verifica se existe um chamado com o id passado na url
+		oldObj = newChamado(dto); // Atualiza os dados usando o metodo newChamado
+		return repository.save(oldObj);
+	}
+
 	private Chamado newChamado(ChamadoDTO obj) {
 		Instrutor instrutor = instrutorService.findById(obj.getInstrutor());
 		Cliente cliente = clienteService.findById(obj.getCliente());
 
 		Chamado chamado = new Chamado();
-		if (obj.getId() == null) {
+		if (obj.getId() != null) {
 			chamado.setId(obj.getId());
 		}
+
+		// Retorna data de fechamento do chamado
+		if (obj.getStatus().equals(2)) {
+			chamado.setDataFechamento(LocalDate.now());
+		}
+
 		return setarDadosChamado(obj, instrutor, cliente, chamado);
 	}
 
