@@ -19,7 +19,7 @@ public class ClienteService {
 
 	@Autowired
 	private ClienteRepository repository;
-	
+
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
@@ -38,14 +38,14 @@ public class ClienteService {
 		Cliente save = new Cliente(dto);
 		return repository.save(save);
 	}
-	
+
 	public Cliente update(ClienteDTO dto, Integer id) {
 		dto.setId(id);
 		Cliente oldObj = findById(id);
 		oldObj = new Cliente(dto);
 		return repository.save(oldObj);
 	}
-	
+
 	public void delete(Integer id) {
 		Cliente obj = findById(id);
 		if (obj.getChamados().size() > 0) {
@@ -59,15 +59,11 @@ public class ClienteService {
 		if (obj.isPresent() && obj.get().getId() != dto.getId()) {
 			throw new DataIntegrityViolationException("CPF ja cadastrado no sistema!");
 		}
-		
+
 		obj = pessoaRepository.findByEmail(dto.getEmail());
 		if (obj.isPresent() && obj.get().getId() != dto.getId()) {
 			throw new DataIntegrityViolationException("Email ja cadastrado no sistema!");
 		}
 	}
-
-
-
-	
 
 }
