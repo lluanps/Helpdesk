@@ -45,6 +45,14 @@ public class ClienteService {
 		oldObj = new Cliente(dto);
 		return repository.save(oldObj);
 	}
+	
+	public void delete(Integer id) {
+		Cliente obj = findById(id);
+		if (obj.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException("Cliente não pode ser deletado pois possui chamado a ser cumprido");
+		}
+		repository.deleteById(id);
+	}
 
 	private void validaPorCpfEEmail(ClienteDTO dto) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(dto.getCpf());
