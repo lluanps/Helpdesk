@@ -1,5 +1,8 @@
 package com.luan.helpdesk.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,13 @@ public class ClienteController {
 	public ResponseEntity<ClienteDTO> findById(@PathVariable Integer id) {
 		Cliente obj = service.findById(id);
 		return ResponseEntity.ok().body(new ClienteDTO(obj));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<ClienteDTO>> findAll() {
+		List<Cliente> list = service.findAll();
+		List<ClienteDTO> listDto = list.stream().map(x -> new ClienteDTO(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 }
