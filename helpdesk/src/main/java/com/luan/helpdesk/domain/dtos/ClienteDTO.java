@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.luan.helpdesk.domain.Cliente;
+import com.luan.helpdesk.domain.enums.Perfil;
 
 public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +25,7 @@ public class ClienteDTO implements Serializable {
 
 	public ClienteDTO() {
 		super();
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public ClienteDTO(Cliente obj) {
@@ -32,7 +35,7 @@ public class ClienteDTO implements Serializable {
 		this.cpf = obj.getCpf();
 		this.email = obj.getEmail();
 		this.senha = obj.getSenha();
-		//this.perfis = obj.getPerfis().stream();
+		this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dateCriacao = obj.getDateCriacao();
 	}
 
@@ -76,12 +79,12 @@ public class ClienteDTO implements Serializable {
 		this.senha = senha;
 	}
 
-	public Set<Integer> getPerfis() {
-		return perfis;
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setPerfis(Set<Integer> perfis) {
-		this.perfis = perfis;
+	public void addPerfil(Perfil perfil) {
+		this.perfis.add(perfil.getCodigo());
 	}
 
 	public LocalDate getDateCriacao() {
