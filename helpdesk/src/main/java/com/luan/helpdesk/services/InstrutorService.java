@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.luan.helpdesk.domain.Instrutor;
@@ -24,6 +25,9 @@ public class InstrutorService {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder enc;
 
 	public Instrutor findById(Integer id) {
 		Optional<Instrutor> obj = repository.findById(id);
@@ -36,6 +40,7 @@ public class InstrutorService {
 
 	public Instrutor create(InstrutorDTO dto) {
 		dto.setId(null);
+		dto.setSenha(enc.encode(dto.getSenha()));
 		validaPorCpfEEmail(dto);
 		Instrutor save = new Instrutor(dto);
 		return repository.save(save);
