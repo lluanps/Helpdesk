@@ -50,8 +50,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 		String username = ((UserSpringSecurity) authResult.getPrincipal()).getUsername();
 		String token = jwtUtil.generateToken(username);
-		response.setHeader("access-control-expose-headers", "Authorization");
-		response.setHeader("Authorization", "Bearer " + token);
+		response.setHeader("Access-Control-Allow-Origin", "*");
+    	response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
+    	response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, enctype, Location");
+    	response.setHeader("Authorization", "Bearer " + token);
 	}
 
 	@Override
@@ -66,7 +68,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	private CharSequence json() {
 		long date = new Date().getTime();
 		return "{"
-				+ "\"timestamp\": " + date + ", "
+				+ "\"timestamp\": " + date + ", " 
 				+ "\"status\": 401, "
 				+ "\"error\": \"Não autorizado\", "
 				+ "\"message\": \"Email ou senha inválidos\", "

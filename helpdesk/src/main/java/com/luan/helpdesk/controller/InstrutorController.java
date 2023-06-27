@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +43,7 @@ public class InstrutorController {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping(value = "/save")
 	public ResponseEntity<InstrutorDTO> create(@Valid @RequestBody InstrutorDTO dto) {
 		Instrutor entity = service.create(dto);
@@ -49,12 +51,14 @@ public class InstrutorController {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<InstrutorDTO> update(@PathVariable Integer id, @Valid @RequestBody InstrutorDTO dto) {
 		Instrutor obj = service.update(id, dto);
 		return ResponseEntity.ok().body(new InstrutorDTO(obj));
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<InstrutorDTO> delete(@PathVariable Integer id) {
 		service.delete(id);
