@@ -17,10 +17,9 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
 	private JWTUtil jwtUtil;
-	
 	private UserDetailsService userDetailsService;
 	
-	public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil,UserDetailsService userDetailsService) {
+	public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, UserDetailsService userDetailsService) {
 		super(authenticationManager);
 		this.jwtUtil = jwtUtil;
 		this.userDetailsService = userDetailsService;
@@ -32,7 +31,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 		String header = request.getHeader("Authorization");
 		if (header != null && header.startsWith("Bearer ")) {
 			UsernamePasswordAuthenticationToken authToken = getAuthentication(header.substring(7));
-			if (authToken != null) {
+			if(authToken != null) {
 				SecurityContextHolder.getContext().setAuthentication(authToken);
 			}
 		}

@@ -50,19 +50,20 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 		String username = ((UserSpringSecurity) authResult.getPrincipal()).getUsername();
 		String token = jwtUtil.generateToken(username);
-		response.setHeader("Access-Control-Allow-Origin", "*");
+		/*response.setHeader("Access-Control-Allow-Origin", "*");
     	response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
-    	response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, enctype, Location");
+    	response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, enctype, Location");*/
     	response.setHeader("Authorization", "Bearer " + token);
+		response.setHeader("access-control-expose-headers", "Authorization");
 	}
 
 	@Override
 	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException failed) throws IOException, ServletException {
-		
-		 response.setStatus(401);
-		 response.setContentType("application/json");
-		 response.getWriter().append(json()); 
+
+		response.setStatus(401);
+		response.setContentType("application/json");
+		response.getWriter().append(json());
 	}
 
 	private CharSequence json() {
