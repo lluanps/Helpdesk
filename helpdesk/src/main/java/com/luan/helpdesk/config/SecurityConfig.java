@@ -8,7 +8,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,11 +20,10 @@ import com.luan.helpdesk.security.JWTUtil;
 import com.luan.helpdesk.security.JwtAuthenticationFilter;
 import com.luan.helpdesk.security.JwtAuthorizationFilter;
 
-@EnableWebSecurity
-/*@EnableGlobalMethodSecurity(prePostEnabled = true)*/
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static final String[] PUBLIC_MATCHERS = {"/h2-console/**"};
+	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**" };
 
 	@Autowired
 	private Environment env;
@@ -42,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.cors().and().csrf().disable();
 		http.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtUtil));
-		http.authorizeRequests()
-			.antMatchers(PUBLIC_MATCHERS).permitAll()
-			.anyRequest().authenticated();
+		
+		http.addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
+		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll().anyRequest().authenticated();
 
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}

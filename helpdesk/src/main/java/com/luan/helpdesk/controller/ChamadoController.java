@@ -27,7 +27,7 @@ public class ChamadoController {
 	
 	@Autowired
 	private ChamadoService service;
-	
+	/*
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<ChamadoDTO> findById(@PathVariable Integer id) {
 		Chamado obj = service.findById(id);
@@ -46,7 +46,7 @@ public class ChamadoController {
 		Chamado entity = service.create(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getId()).toUri();
 		return ResponseEntity.created(uri).build();
-	}
+	}*/
 	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ChamadoDTO> update(@PathVariable Integer id, @Valid @RequestBody ChamadoDTO dto) {
