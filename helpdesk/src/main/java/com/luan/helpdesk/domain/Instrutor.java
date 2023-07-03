@@ -27,6 +27,7 @@ public class Instrutor extends Pessoa {
 
 	public Instrutor(Integer id, String nome, String cpf, String email, String senha) {
 		super(id, nome, cpf, email, senha);
+		addPerfil(Perfil.INSTRUTOR);
 	}
 	
 	public Instrutor(InstrutorDTO obj) {
