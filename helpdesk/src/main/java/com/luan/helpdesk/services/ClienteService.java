@@ -47,6 +47,11 @@ public class ClienteService {
 	public Cliente update(ClienteDTO dto, Integer id) {
 		dto.setId(id);
 		Cliente oldObj = findById(id);
+		
+		if (!dto.getSenha().equals(oldObj.getSenha())) {
+			dto.setSenha(enc.encode(dto.getSenha()));
+		}
+		
 		oldObj = new Cliente(dto);
 		return repository.save(oldObj);
 	}

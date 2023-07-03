@@ -49,6 +49,11 @@ public class InstrutorService {
 	public Instrutor update(Integer id, @Valid InstrutorDTO dto) {
 		dto.setId(id);
 		Instrutor oldObj = findById(id);
+		
+		if (!dto.getSenha().equals(oldObj.getSenha())) {
+			dto.setSenha(enc.encode(dto.getSenha()));
+		}
+		
 		validaPorCpfEEmail(dto);
 		oldObj = new Instrutor(dto);
 		return repository.save(oldObj);

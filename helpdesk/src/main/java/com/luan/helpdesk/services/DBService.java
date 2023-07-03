@@ -33,22 +33,22 @@ public class DBService {
 
 	public void instanciaDB() {
 		
-		Instrutor inst1 = new Instrutor(null, "Luan Pinheiro", "222.632.070-90", "luan@gmail.com", enc.encode("admin"));
+		Instrutor inst1 = new Instrutor(null, "Luan Pinheiro", "22263207090", "luan@gmail.com", enc.encode("admin"));
 		inst1.addPerfil(Perfil.ADMIN);
-		Instrutor inst2 = new Instrutor(null, "Falcão", "040.415.570-70", "falcao@gmail.com", enc.encode("admin"));
+		Instrutor inst2 = new Instrutor(null, "Falcão", "04041557070", "falcao@gmail.com", enc.encode("admin"));
 		inst1.addPerfil(Perfil.INSTRUTOR);
-		Instrutor inst3 = new Instrutor(null, "Ronaldo Nazário", "777.143.530-07", "ronaldo@gmail.com", enc.encode("admin"));
+		Instrutor inst3 = new Instrutor(null, "Ronaldo Nazário", "77714353007", "ronaldo@gmail.com", enc.encode("admin"));
 		inst1.addPerfil(Perfil.INSTRUTOR);
 		
-		Cliente cli1 = new Cliente(null, "Messi", "530.212.030-51", "messi@gmail.com", enc.encode("123"));
-		Cliente cli2 = new Cliente(null, "Neymar Jr.", "370.187.890-01", "neymar@gmail.com", enc.encode("123"));
-		Cliente cli3 = new Cliente(null, "Cristiano R.", "960.843.820-96", "cr7@gmail.com", enc.encode("123"));
-		Cliente cli4 = new Cliente(null, "Vinicius Jr.", "346.179.500-36", "vinijr@gmail.com", enc.encode("123"));
-		Cliente cli5 = new Cliente(null, "Thiago Silva", "673.870.910-21", "thiagosilva@gmail.com", enc.encode("123"));
-		Cliente cli6 = new Cliente(null, "Modric", "331.978.210-09", "modric@gmail.com", enc.encode("123"));
-		Cliente cli7 = new Cliente(null, "Mbappé", "996.723.040-13", "mbappe@gmail.com", enc.encode("123"));
-		Cliente cli8 = new Cliente(null, "Rodrygo", "136.550.510-34", "rodrygo@gmail.com", enc.encode("123"));
-		Cliente cli9 = new Cliente(null, "Haaland", "168.444.480-23", "haaland@gmail.com", enc.encode("123"));
+		Cliente cli1 = new Cliente(null, "Messi", "53021203051", "messi@gmail.com", enc.encode("123"));
+		Cliente cli2 = new Cliente(null, "Neymar Jr.", "37018789001", "neymar@gmail.com", enc.encode("123"));
+		Cliente cli3 = new Cliente(null, "Cristiano R.", "96084382096", "cr7@gmail.com", enc.encode("123"));
+		Cliente cli4 = new Cliente(null, "Vinicius Jr.", "34617950036", "vinijr@gmail.com", enc.encode("123"));
+		Cliente cli5 = new Cliente(null, "Thiago Silva", "67387091021", "thiagosilva@gmail.com", enc.encode("123"));
+		Cliente cli6 = new Cliente(null, "Modric", "33197821009", "modric@gmail.com", enc.encode("123"));
+		Cliente cli7 = new Cliente(null, "Mbappé", "99672304013", "mbappe@gmail.com", enc.encode("123"));
+		Cliente cli8 = new Cliente(null, "Rodrygo", "13655051034", "rodrygo@gmail.com", enc.encode("123"));
+		Cliente cli9 = new Cliente(null, "Haaland", "16844448023", "haaland@gmail.com", enc.encode("123"));
 		
 		Chamado c1 = new Chamado(null, Prioridade.MEDIA, Status.ANDAMENTO, "Chamado 01", "Primeiro chamado", inst1, cli1);
 		Chamado c2 = new Chamado(null, Prioridade.BAIXA, Status.ABERTO, "Chamado 02", "Segundo chamado", inst2, cli2);
